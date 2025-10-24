@@ -79,7 +79,7 @@ before installing the Python requirements. This ensures that the app runs identi
 
 ## Coding Logic
 
-### Image Pre-processing** 
+### Image Pre-processing 
 I used Pillow (PIL) for my image pre-preprocessing. While pytesseract handles the actual text recognition, Pillow performs critical preprocessing steps that dramatically impact accuracy:
 
 - **Grayscale conversion** - Removes color information that can confuse OCR engines, focusing solely on text contrast
