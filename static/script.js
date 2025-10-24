@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Drag and Drop Logic ---
 
-    // Prevent default drag behaviors
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
         dropZone.addEventListener(eventName, preventDefaults, false);
     });
@@ -27,32 +26,27 @@ document.addEventListener('DOMContentLoaded', () => {
         e.stopPropagation();
     }
 
-    // Highlight drop zone when item is dragged over
     ['dragenter', 'dragover'].forEach(eventName => {
         dropZone.addEventListener(eventName, highlight, false);
     });
 
-    // Un-highlight drop zone when item leaves
     ['dragleave', 'drop'].forEach(eventName => {
         dropZone.addEventListener(eventName, unhighlight, false);
     });
 
-    function highlight(e) {
+    function highlight() {
         dropZone.classList.add('dragover');
     }
 
-    function unhighlight(e) {
+    function unhighlight() {
         dropZone.classList.remove('dragover');
     }
 
-    // Handle dropped files
     dropZone.addEventListener('drop', handleDrop, false);
 
     function handleDrop(e) {
         const dt = e.dataTransfer;
         const files = dt.files;
-
-        // Update the file input with the dropped file
         imageInput.files = files;
         // Manually trigger the 'change' event to update the preview
         imageInput.dispatchEvent(new Event('change'));
@@ -76,36 +70,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Async Form Submission ---
     form.addEventListener('submit', async (e) => {
-        e.preventDefault(); // Prevent default page reload
+        e.preventDefault(); 
         
-        // 1. Show loading indicator and clear old results
         loadingIndicator.classList.remove('hidden');
-        resultsContent.classList.add('hidden'); // Hide old results
+        resultsContent.classList.add('hidden'); 
         submitButton.disabled = true;
         submitButton.textContent = 'Processing...';
 
-        // 2. Prepare form data
         const formData = new FormData(form);
 
         try {
-            // 3. Send data to backend
-            const response = await fetch('/verify', {
+            const response = await fetch('/verify', { // Assuming your backend endpoint is /verify
                 method: 'POST',
                 body: formData,
             });
 
             const results = await response.json();
-
-            // 4. Display results
             displayResults(results);
 
         } catch (error) {
-            // Handle network or server errors
             console.error('Submission error:', error);
-            resultsSummary.innerHTML = '&#10060; An unexpected error occurred. Please check the console and try again.';
+            resultsSummary.innerHTML = '&#10060; An unexpected error occurred. Please try again.';
             resultsSummary.className = 'failure';
         } finally {
-            // 5. Hide loading indicator and show results
             loadingIndicator.classList.add('hidden');
             resultsContent.classList.remove('hidden');
             submitButton.disabled = false;
@@ -121,14 +108,12 @@ document.addEventListener('DOMContentLoaded', () => {
         resultsDetails.innerHTML = '';
         resultsSummary.classList.remove('success', 'failure');
         
-        // Handle a backend error (e.g., unreadable image)
         if (results.error) {
             resultsSummary.innerHTML = `&#10060; Error: ${results.error}`;
             resultsSummary.className = 'failure';
             return;
         }
 
-        // Display Overall Status
         if (results.overall_status === 'success') {
             resultsSummary.innerHTML = '&#9989; Success: The label matches the form data.';
             resultsSummary.className = 'success';
@@ -137,13 +122,12 @@ document.addEventListener('DOMContentLoaded', () => {
             resultsSummary.className = 'failure';
         }
 
-        // Display Detailed Checklist
         results.checks.forEach(check => {
             const item = document.createElement('div');
             item.className = 'result-item';
 
-            const icon = check.match ? '&#9989;' : '&#10060;';
             const iconClass = check.match ? 'match' : 'mismatch';
+            const icon = check.match ? '&#9989;' : '&#10060;';
             
             const message = check.match 
                 ? `<strong>${check.field}:</strong> <span>Matched. (Form: '${check.form_value}')</span>`
@@ -156,7 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
             resultsDetails.appendChild(item);
         });
 
-        // Show the raw OCR output for transparency
         if (results.ocr_text) {
             ocrTextContent.textContent = results.ocr_text;
             ocrOutput.classList.remove('hidden');
@@ -164,4 +147,27 @@ document.addEventListener('DOMContentLoaded', () => {
             ocrOutput.classList.add('hidden');
         }
     }
+    
+    // --- Theme Switch Logic ---
+    
+    const themeSelect = document.getElementById('theme-select');
+    
+    // Load saved theme or default to 'forest'
+    const currentTheme = localStorage.getItem('theme') || 'forest';
+    document.body.dataset.theme = currentTheme === 'forest' ? '' : currentTheme;
+    themeSelect.value = currentTheme;
+
+    themeSelect.addEventListener('change', () => {
+        const selectedTheme = themeSelect.value;
+        // For 'forest' (default), remove the data-theme attribute
+        // For other themes, set the data-theme attribute
+        if (selectedTheme === 'forest') {
+            document.body.removeAttribute('data-theme');
+        } else {
+            document.body.dataset.theme = selectedTheme;
+        }
+        // Save the choice to localStorage
+        localStorage.setItem('theme', selectedTheme);
+    });
+
 });

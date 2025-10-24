@@ -145,7 +145,7 @@ def test_scenario_multiple_mismatches_2(base_form_data, testing_ocr_text):
     assert results["checks"][2]["match"] is True # ABV
     assert results["checks"][4]["match"] is True # Warning
 
-# --- WARNING TESTS ---
+# --- WARNING Tests ---
 
 def test_scenario_warning_fully_missing(base_form_data, testing_ocr_text):
     """

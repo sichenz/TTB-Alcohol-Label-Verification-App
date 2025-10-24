@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI TTB Label Verification</title>
-    <!-- Google Fonts for a cleaner look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -20,7 +19,6 @@
 
     <main>
         <div class="app-container">
-            <!-- 1. Form Input -->
             <form id="verification-form" class="card">
                 <div class="form-section">
                     <h2>1. Application Form</h2>
@@ -47,23 +45,19 @@
                     </div>
                 </div>
 
-                <!-- 2. Image Upload -->
                 <div class="form-section">
                     <h2>2. Label Image</h2>
                     <p>Upload a clear image of the product label.</p>
                     
-                    <!-- New Drag-and-Drop Zone -->
                     <div class="form-group">
                         <label id="drop-zone" for="label-image-input">
                             <div class="drop-zone-icon">
-                                <!-- Simple upload SVG icon -->
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="48" height="48">
                                     <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/>
                                 </svg>
                             </div>
                             <p><b>Drag & drop an image</b> or click to select</p>
                             <span class="drop-zone-format">PNG, JPG, or JPEG</span>
-                            <!-- This input is hidden but triggered by the label -->
                             <input type="file" id="label-image-input" name="label_image" accept="image/png, image/jpeg" required>
                         </label>
                     </div>
@@ -76,7 +70,6 @@
                 <button type="submit" id="submit-button">Verify Label</button>
             </form>
 
-            <!-- 3. Verification & Results Display -->
             <div id="results-container" class="card">
                 <h2>3. Verification Results</h2>
                 
@@ -87,7 +80,6 @@
 
                 <div id="results-content">
                     <div id="results-summary">
-                        <!-- Default state before submission -->
                         <p class="results-placeholder">Verification results will appear here once you submit the form and image.</p>
                     </div>
                     <div id="results-details"></div>
@@ -101,7 +93,17 @@
     </main>
 
     <footer>
-        <p>TTB Take-Home Project | Full-Stack Implementation</p>
+        <div class="footer-content">
+            <p>TTB Alcohol Label Verification App | Created by Sichen Zhong</p>
+            
+            <div class="theme-switcher">
+                <label for="theme-select">Theme:</label>
+                <select id="theme-select">
+                    <option value="forest">Pastel Forest</option>
+                    <option value="dreamy">Pastel Dream</option>
+                </select>
+            </div>
+        </div>
     </footer>
     <script src="/static/script.js"></script>
 </body>

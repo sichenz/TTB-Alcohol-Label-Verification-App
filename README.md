@@ -4,15 +4,11 @@ This is a full-stack web application that simulates a simplified version of the 
 
 ## 🚀 Live Application
 
-**[View Live Demo](#)** *(Replace with your deployed URL)*
-
-## 📸 Application Preview
-
-*(Add GIF or screenshot here)*
+**[View Live Demo](https://ttb-alcohol-label-verification-app.onrender.com)**
 
 ---
 
-## ✨ Key Features
+## Key Features
 
 ### Mandatory Field Verification
 
@@ -58,7 +54,7 @@ This project runs entirely on open-source technologies with no external API depe
 
 **Technology:** I used a standard HTML5, CSS3, and modern JavaScript (ES6+).
 
-**Rationale:** For this project's UI, I only used a single form and a single results panel, which does not require complex state management. Hence, using a vanilla JavaScript with the `fetch` API creates a smooth single-page experience without the overhead of React or Vue (although this could definitely be built upon in the future\!). This approach keeps the bundle size small and the codebase accessible.
+**Rationale:** For this project's UI, I only used a single form and a single results panel, which does not require complex state management. Hence, using a vanilla JavaScript with the `fetch` API creates a smooth single-page experience without the overhead of React or Vue (although this could definitely be built upon in the future!). This approach keeps the bundle size small and the codebase accessible.
 
 ### OCR Engine: Tesseract (pytesseract)
 
@@ -80,7 +76,6 @@ before installing the Python requirements. This ensures that the app runs identi
 **Platform:** I chose Render, which is a cloud platform that connects directly to GitHub.
 
 **Rationale:** Render has a generous free tier and built-in Docker support (main reason why I chose this!). By connecting directly to the GitHub repository, it automatically builds the `Dockerfile` on every push, and manages the deployed web service, making continuous deployment simple and efficient.
-
 
 ## Coding Logic
 
@@ -196,18 +191,18 @@ tesseract --version
 The test file (`test_app.py`) validates all required scenarios by using simulated OCR text directly into the `perform_verification()` function:
 
 **Core Scenarios:**
-- ✅ **Happy Path** - Perfect match across all fields (`test_scenario_all_match`)
-- ✅ **Individual Mismatches** - Isolated test for each of the 5 fields
-- ✅ **Multiple Mismatches** - Verifies that all errors are reported simultaneously
-- ✅ **Edge Cases** - Tests partial match prevention, word boundaries, and multi-line text
+- **Happy Path** - Perfect match across all fields (`test_scenario_all_match`)
+- **Individual Mismatches** - Isolated test for each of the 5 fields
+- **Multiple Mismatches** - Verifies that all errors are reported simultaneously
+- **Edge Cases** - Tests partial match prevention, word boundaries, and multi-line text
 
 **Warning-Specific Tests:**
-- ✅ `test_scenario_warning_fully_missing` - Validates "missing" detection
-- ✅ `test_scenario_warning_present_but_mismatched` - Validates content mismatch detection
+- `test_scenario_warning_fully_missing` - Validates "missing" detection
+- `test_scenario_warning_present_but_mismatched` - Validates content mismatch detection
 
 **Error Handling:**
-- ✅ `test_scenario_unreadable_image` - Handles blank/corrupted OCR output
-- ✅ `test_scenario_no_partial_matches` - Prevents false positives from substring matches
+- `test_scenario_unreadable_image` - Handles blank/corrupted OCR output
+- `test_scenario_no_partial_matches` - Prevents false positives from substring matches
 
 ### Running Tests
 
@@ -272,9 +267,17 @@ These tests make sure that our verification function is catching all forms of mi
 - Position the label to fill most of the frame
 - Use images where text is horizontal and not distorted
 
+**Fun Bonus:** Switching Themes
+
+Users can change themes at any time via the dropdown selector in the footer:
+1. Click the "Theme" dropdown in the bottom-right corner
+2. Select either "Pastel Forest" or "Pastel Dream"
+3. The entire interface transitions to the selected theme
+4. Your preference is automatically saved for future visits
+
 ---
 
-## ⚠️ Known Limitations
+## Known Limitations
 
 ### OCR Accuracy Dependencies
 
@@ -304,7 +307,7 @@ Potential enhancements for future versions:
 
 ---
 
-## 👤 Author
+## Author
 
 **Sichen Zhong**
 - GitHub: [@sichenz](https://github.com/sichenz)
@@ -312,7 +315,7 @@ Potential enhancements for future versions:
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) - Google's open-source OCR engine
 - [TTB](https://www.ttb.gov/) - Alcohol and Tobacco Tax and Trade Bureau for regulatory guidelines
