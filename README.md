@@ -267,7 +267,7 @@ These tests make sure that our verification function is catching all forms of mi
 - Position the label to fill most of the frame
 - Use images where text is horizontal and not distorted
 
-**Fun Bonus:** Switching Themes
+### Fun Bonus: Switching Themes
 
 Users can change themes at any time via the dropdown selector in the footer:
 1. Click the "Theme" dropdown in the bottom-right corner
