@@ -80,7 +80,7 @@ before installing the Python requirements. This ensures that the app runs identi
 ## Coding Logic
 
 ### Image Pre-processing 
-I used Pillow (PIL) for my image pre-preprocessing. While pytesseract handles the actual text recognition, Pillow performs critical preprocessing steps that dramatically impact accuracy:
+I used Pillow (PIL) for my image pre-preprocessing. While pytesseract handles the actual text recognition, Pillow performs the critical preprocessing steps that can dramatically impact accuracy:
 
 - **Grayscale conversion** - Removes color information that can confuse OCR engines, focusing solely on text contrast
 - **Auto-contrast enhancement** - Adjusts brightness and contrast to make text more distinct from backgrounds
@@ -90,7 +90,7 @@ This preprocessing pipeline in the `extract_text_from_image()` function is espec
 
 ### Verification Process
 
-**Design Pattern:** My app's core verification logic resides in `perform_verification()`, a "pure" function completely decoupled from Flask's web layer. This function takes in the form data and OCR text as inputs and returns a results dictionary. 
+**Design Pattern:** My app's core verification logic is found in `perform_verification()`, a "pure" function completely decoupled from Flask's web layer. This function takes in the form data and OCR text as inputs and returns a results dictionary. 
 
 **Benefits:**
 - **100% testable** - Can be imported directly into pytest without HTTP mocking (As you'll see in `test_app.py` (explained more in the Testing section), we can import this function directly into `pytest` and test all scenarios to make sure our verification process is correct without ever needing to simulate a web request.)
@@ -188,7 +188,7 @@ tesseract --version
 
 ### Test Coverage
 
-The test file (`test_app.py`) validates all required scenarios by using simulated OCR text directly into the `perform_verification()` function:
+The test file (`test_app.py`) tests all required scenarios by using simulated OCR text and applying the text directly into the `perform_verification()` function:
 
 **Core Scenarios:**
 - **Happy Path** - Perfect match across all fields (`test_scenario_all_match`)
@@ -303,7 +303,7 @@ Potential enhancements for future versions:
 - Multiple language support (Tesseract supports 100+ languages)
 - Batch processing for multiple labels
 - Export results as PDF reports
-- Integration with TTB's actual API (if available)
+- Integration with higher performing LLMs or cloud-based services like Google Cloud Vision AI
 
 ---
 
